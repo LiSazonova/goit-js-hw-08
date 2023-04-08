@@ -7,7 +7,7 @@ const player = new Player(iframe);
 
 onResumeVideo();
 
-player.on('timeupdate', throttle(setDataTime, 500));
+player.on('timeupdate', throttle(setDataTime, 1000));
 
 function setDataTime(data) {
   localStorage.setItem(DATA_TIME_STORAGE_KEY, data.seconds);
