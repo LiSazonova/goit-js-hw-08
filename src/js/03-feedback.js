@@ -27,15 +27,15 @@ function onTextInput(e) {
 }
 
 function setDataForm() {
-    localStorage.setItem(DATA_FORM_STORAGE_KEY, JSON.stringify(formData));
+    sessionStorage.setItem(DATA_FORM_STORAGE_KEY, JSON.stringify(formData));
 }
 
 function onRestoreDataField() {
-    if (!localStorage.getItem(DATA_FORM_STORAGE_KEY)) {
+    if (!sessionStorage.getItem(DATA_FORM_STORAGE_KEY)) {
         return {};
     }
 
-    const savedDataForm = JSON.parse(localStorage.getItem(DATA_FORM_STORAGE_KEY));
+    const savedDataForm = JSON.parse(sessionStorage.getItem(DATA_FORM_STORAGE_KEY));
 
     if (savedDataForm.email) {
         form.email.value = savedDataForm.email;
@@ -49,7 +49,7 @@ function onRestoreDataField() {
 }
 
 function clearFormData() {
-    localStorage.removeItem(DATA_FORM_STORAGE_KEY);
+    sessionStorage.removeItem(DATA_FORM_STORAGE_KEY);
     form.reset();
     formData = {};
 }
