@@ -15,8 +15,11 @@ function onSubmitForm(e) {
         elements: { email, message },
     } = form;
 
-    console.log({email: email.value, message: message.value});
-
+    if (!email.value || !message.value) {
+    alert(`Будь ласка, заповніть всі обов'язкові поля`);
+    return;
+    }
+    
     clearFormData();
 }
 
@@ -27,15 +30,15 @@ function onTextInput(e) {
 }
 
 function setDataForm() {
-    sessionStorage.setItem(DATA_FORM_STORAGE_KEY, JSON.stringify(formData));
+    localStorage.setItem(DATA_FORM_STORAGE_KEY, JSON.stringify(formData));
 }
 
 function onRestoreDataField() {
-    if (!sessionStorage.getItem(DATA_FORM_STORAGE_KEY)) {
+    if (!localStorage.getItem(DATA_FORM_STORAGE_KEY)) {
         return {};
     }
 
-    const savedDataForm = JSON.parse(sessionStorage.getItem(DATA_FORM_STORAGE_KEY));
+    const savedDataForm = JSON.parse(localStorage.getItem(DATA_FORM_STORAGE_KEY));
 
     if (savedDataForm.email) {
         form.email.value = savedDataForm.email;
@@ -49,7 +52,7 @@ function onRestoreDataField() {
 }
 
 function clearFormData() {
-    sessionStorage.removeItem(DATA_FORM_STORAGE_KEY);
+    localStorage.removeItem(DATA_FORM_STORAGE_KEY);
     form.reset();
     formData = {};
 }
